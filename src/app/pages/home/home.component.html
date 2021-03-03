@@ -1,0 +1,28 @@
+<mat-sidenav-container > 
+    <!-- Sidenav -->
+    <mat-sidenav [mode]="isBiggerScreen() ? 'over' : 'side'"  #sidenav [(opened)]="opened" [fixedInViewport]="true"
+      [fixedTopGap]>
+      <mat-nav-list >
+        <a mat-list-item routerLinkActive="active" routerLink="/add-restaurant">
+          <mat-icon>add</mat-icon> Add Restaurant
+        </a>
+        <a mat-list-item routerLinkActive="active" routerLink="/restaurant-list">
+          <mat-icon>format_list_bulleted</mat-icon> View Restaurants
+        </a>
+        <a mat-list-item routerLinkActive="active" routerLink="/add-hotel">
+          <mat-icon>add</mat-icon> Add Hotel
+        </a>
+        <a mat-list-item routerLinkActive="active" routerLink="/hotel-list">
+          <mat-icon>format_list_bulleted</mat-icon> View Hotels
+        </a>
+        <a mat-list-item routerLinkActive="active" routerLink="/user-list">
+          <mat-icon>format_list_bulleted</mat-icon> View Users
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <!-- Main content -->
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

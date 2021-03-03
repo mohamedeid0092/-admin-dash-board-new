@@ -1,0 +1,18 @@
+.mat-toolbar.mat-primary { background: #34e0a1; color: #fff; }
+.logo{
+    width: 160px;
+    height: 100%;
+    
+}
+
+ .login{
+     cursor: pointer;
+     color: black;
+ }:hover{
+   color:rgb(104, 104, 104)
+ }
+
+.mat-sidenav{
+background-color:white;
+}
+

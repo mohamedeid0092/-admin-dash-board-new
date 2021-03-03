@@ -1,0 +1,158 @@
+<!-- Title group  -->
+<div class="title-group">
+    <h1 class="mat-h1">Add Hotel</h1>
+    <mat-divider fxFlex="1 0"></mat-divider>
+</div>
+
+<!-- Form -->
+<div class="inner-wrapper">
+    <form [formGroup]="hotelForm" (ngSubmit)="submitHotelForm()" #resetHotelForm="ngForm" novalidate>
+        <!-- Left block -->
+        <mat-card>
+            <div class="controlers-wrapper">
+                <!-- Name -->
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Hotel Name" formControlName="name">
+                    <mat-error *ngIf="handleError('name', 'required')">
+                        You must provide a <strong>hotel name</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Rooms-->
+                <mat-form-field class="example-full-width">
+                    <input matInput type="number" placeholder="Hotel Rooms" formControlName="rooms">
+                    <mat-error *ngIf="handleError('rooms', 'required')">
+                        You must provide a <strong>hotel rooms</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <!--Map-->
+                <mat-form-field class="example-full-width">
+                    <input matInput type="number" placeholder="Map Latitude" formControlName="map" value="map.latitude">
+                    <!-- <mat-error *ngIf="handleError('map', 'required')">
+              You must provide a <strong>hotel rooms</strong>
+            </mat-error> -->
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput type="number" placeholder="Map longitude" formControlName="map" value="map.longitude">
+                    <!-- <mat-error *ngIf="handleError('map', 'required')">
+              You must provide a <strong>hotel rooms</strong>
+            </mat-error> -->
+                </mat-form-field>
+                <div class="misc-bottom-padding">
+                    <mat-label>Hotel Class:</mat-label>
+                    <mat-radio-group *ngFor="let classes of HotelCategoryData[0].hotelClass" formControlName="class">
+                        <mat-radio-button class="tp-radio-button" [value]="classes._id">{{classes.name}}</mat-radio-button>
+                        <!-- <mat-radio-button class = "tp-radio-button" value="Mid-range">Mid-range</mat-radio-button>
+              <mat-radio-button  class = "tp-radio-button" value="Fine Dining">Fine Dining</mat-radio-button> -->
+                    </mat-radio-group>
+                </div>
+                <!--popular-->
+                <div class="misc-bottom-padding">
+                    <mat-label>Popular :</mat-label>
+                    <section *ngFor="let popular of HotelCategoryData[0].popular let i = index">
+                        <mat-checkbox [value]="popular._id" (change)="changeOutputPopular($event)">{{popular.name}}</mat-checkbox>
+                    </section>
+                </div>
+                <!--language spoken-->
+                <div class="misc-bottom-padding">
+                    <mat-label>Popular :</mat-label>
+                    <section *ngFor="let language of HotelCategoryData[0].languageSpoken">
+                        <mat-checkbox [value]="language._id" (change)="changeOutputlanguageSpoken($event)">{{language.name}}</mat-checkbox>
+                    </section>
+                </div>
+                <!-- Image -->
+                <div>
+                    <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+                    <input type="file" #filePicker multiple (change)="onImagePicked($event)">
+                </div>
+                <div class="image-preview" *ngIf="imagePreview !==[] && imagePreview ">
+                    <img *ngFor="let url of imagePreview" [src]="url" [alt]="hotelForm.value.name">
+                </div>
+                <button type="submit" class="btn btn-info">upload</button>
+                <!-- Email -->
+                <!-- <mat-form-field class="example-full-width">
+            <input matInput placeholder="Student email" formControlName="student_email">
+            <mat-error *ngIf="handleError('student_email', 'required')">
+              You must provide a<strong>student email</strong>
+            </mat-error>
+          </mat-form-field> -->
+
+                <!-- Section -->
+                <!-- <mat-form-field>
+            <mat-label>Section</mat-label>
+            <mat-select [(value)]="selected" formControlName="section">
+              <mat-option [value]="sectioinArray" *ngFor="let sectioinArray of SectioinArray">{{sectioinArray}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="handleError('section', 'required')">
+              Section is required
+            </mat-error>
+          </mat-form-field>-->
+            </div>
+        </mat-card>
+
+        <!-- Right block -->
+        <mat-card>
+            <div class="controlers-wrapper">
+                <!-- Add styles -->
+                <!-- <mat-form-field class="multiple-items">
+            <mat-chip-list #chipListHotel>
+              <mat-chip *ngFor="let style of style" [selectable]="selectable" [removable]="removable"
+                (removed)="removeStyle(style)">
+                {{style}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Add Style" [matChipInputFor]="chipListHotel"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addStyle($event)">
+            </mat-chip-list>
+            <i class="material-icons tooltip-info" matTooltip="Enter style name and press enter to add styles">
+              info
+            </i>
+          </mat-form-field> -->
+
+                <!-- Date of birth -->
+                <!-- <mat-form-field>
+            <input matInput readonly [matDatepicker]="picker" placeholder="Date of birth" formControlName="dob"
+              (dateChange)="formatDate($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="handleError('dob', 'required')">
+              Date of birth is required
+            </mat-error>
+          </mat-form-field> -->
+
+
+                <!-- Style -->
+                <div class="misc-bottom-padding">
+                    <mat-label>Style:</mat-label>
+                    <section *ngFor="let elem of styleslist">
+                        <mat-checkbox [value]="elem" (change)="changeOutputStyle($event)">{{elem}}</mat-checkbox>
+                    </section>
+                </div>
+                <div class="misc-bottom-padding">
+                    <mat-label>Deals:</mat-label>
+                    <section *ngFor="let deals of HotelCategoryData[0].deals let i = index">
+                        <mat-checkbox [value]="deals._id" (change)="changeOutputDeals($event)">{{deals.name}}</mat-checkbox>
+                    </section>
+                </div>
+                <div class="misc-bottom-padding">
+                    <mat-label>Amenities:</mat-label>
+                    <section *ngFor="let amenities of HotelCategoryData[0].amenities let i = index">
+                        <mat-checkbox [value]="amenities._id" (change)="changeOutputAmenities($event)">{{amenities.name}}</mat-checkbox>
+                    </section>
+                </div>
+            </div>
+        </mat-card>
+
+        <!-- Submit & Reset -->
+        <mat-card>
+            <div class="full-wrapper button-wrapper">
+                <div class="button-wrapper">
+                    <button mat-flat-button color="warn">Submit</button>
+                </div>
+            </div>
+        </mat-card>
+    </form>
+</div>

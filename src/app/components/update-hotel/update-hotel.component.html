@@ -1,0 +1,97 @@
+<!-- Title group  -->
+<div class="title-group">
+    <h1 class="mat-h1">Add Student</h1>
+    <mat-divider fxFlex="1 0"></mat-divider>
+  </div>
+  
+  <!-- Form -->
+  <div class="inner-wrapper">
+    <form [formGroup]="hotelForm" (ngSubmit)="updateHotelForm()" #resetStudentForm="ngForm" novalidate>
+      <!-- Left block -->
+      <mat-card>
+        <div class="controlers-wrapper">
+          <!-- Name -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Hotel name" formControlName="name">
+            <mat-error *ngIf="handleError('name', 'required')">
+              You must provide a<strong>hotel name</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Booking -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Booking" formControlName="images">
+            <mat-error *ngIf="handleError('images', 'required')">
+              You must provide a<strong>hotel Images</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Section -->
+   <!--        <mat-form-field>
+            <mat-label>Section</mat-label>
+            <mat-select [(value)]="selected" formControlName="section">
+              <mat-option [value]="sectioinArray" *ngFor="let sectioinArray of SectioinArray">{{sectioinArray}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="handleError('section', 'required')">
+              Section is required
+            </mat-error>
+          </mat-form-field> -->
+        </div>
+      </mat-card>
+  
+      <!-- Right block -->
+      <mat-card>
+        <div class="controlers-wrapper">
+          <!-- Add subjects -->
+          <mat-form-field class="multiple-items">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let subjectArray of subjectArray" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(subjectArray)">
+                {{subjectArray.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Add Pricedeals" [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <i class="material-icons tooltip-info" matTooltip="Enter subject name and press enter to add subjects">
+              info
+            </i>
+          </mat-form-field>
+  
+          <!-- Date of birth -->
+          <mat-form-field>
+            <input matInput readonly [matDatepicker]="picker" placeholder="Room" formControlName="room"
+              (dateChange)="formatDate($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="handleError('room', 'required')">
+              Number of rooms
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Gender -->
+          <div class="misc-bottom-padding">
+            <mat-label>Class:</mat-label>
+            <mat-radio-group aria-label="Select an option" formControlName="class">
+              <mat-radio-button value="Male">1</mat-radio-button>
+              <mat-radio-button value="Female">2</mat-radio-button>
+              <mat-radio-button value="Female">3</mat-radio-button>
+              <mat-radio-button value="Female">4</mat-radio-button>
+              <mat-radio-button value="Female">5</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </mat-card>
+  
+      <!-- Submit & Reset -->
+      <mat-card>
+        <div class="full-wrapper button-wrapper">
+          <div class="button-wrapper">
+            <button mat-flat-button color="warn">Update</button>
+          </div>
+        </div>
+      </mat-card>
+    </form>
+  </div>
